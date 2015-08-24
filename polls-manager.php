@@ -27,6 +27,7 @@ $base_page = 'admin.php?page='.$base_name;
 $mode = (isset($_GET['mode']) ? trim($_GET['mode']) : '');
 $poll_id = (isset($_GET['id']) ? intval($_GET['id']) : 0);
 $poll_aid = (isset($_GET['aid']) ? intval($_GET['aid']) : 0);
+$text = '';
 
 ### Form Processing
 if(!empty($_POST['do'])) {
@@ -62,7 +63,11 @@ if(!empty($_POST['do'])) {
 				}
 			}
 			// Poll End Date
-			$pollq_expiry_no = intval($_POST['pollq_expiry_no']);
+            if (in_array('pollq_expiry_no', $_POST)) {
+                $pollq_expiry_no = intval($_POST['pollq_expiry_no']);
+            } else {
+                $pollq_expiry_no = 0;
+            }
 			if($pollq_expiry_no == 1) {
 				$pollq_expiry = '';
 			} else {
